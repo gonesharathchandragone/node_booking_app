@@ -1,42 +1,34 @@
 services:
   buses_service:
-    build: ./buses-service
-    container_name: buss_cont
+    build: ./busses-service
     ports:
-      - "1111:3000"
+      -"1111:3000"
     networks:
       - bussnetwork
-    restart: unless-stopped
-  movies_service:
-    build: ./movies-service
-    container_name: movie_cont
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+  flights_service:
+    build: ./flights-service
     ports:
       - "2222:3000"
     networks:
-      - movienetwork
-    restart: unless-stopped
-  train_service:
-    build: ./trains-service
-    container_name: trains_cont
+      - flightsnetwork
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+  movies_service:
+    build: ./movies-service 
     ports:
-      - "3333:3000"
+      - "3333:3000" 
     networks:
-      - trainnetwork
-    restart: unless-stopped
-  flights_service:
-    build: ./flights-service
-    container_name: flights_cont
-    ports:
-      - "4444:3000"
-    networks:
-      - flightnetwork
-    restart: unless-stopped
-networks:
-  bussnetwork:
-    driver: bridge
-  movienetwork:
-    driver: bridge
-  trainnetwork:
-    driver: bridge
-  flightnetwork:
-    driver: bridge  
+      - moviesnetwork
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+  
+
+
