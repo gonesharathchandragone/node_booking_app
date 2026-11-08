@@ -6,7 +6,10 @@ services:
     container_name: busscont1
     networks:
       - bussnetwork
-    restart: unless-stopped
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
   flightservice:
     build: ./flights-service
     ports:
@@ -14,7 +17,10 @@ services:
     container_name: flightcont1
     networks:
       - flightnetwork
-    restart: unless-stopped
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
   movieservice:
     build: ./movies-service
     ports:
@@ -22,15 +28,21 @@ services:
     container_name: moviecont1
     networks:
       - movienetwork
-    restart: unless-stopped
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
   trainservice:
     build: ./trains-service
     ports:
       -"4444:3000"
     container_name: traincont1
     networks:
-      - traincont1
-    restart: unless:stopped
+      - trainnetwork
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
 
 networks:
   bussnetwork:
