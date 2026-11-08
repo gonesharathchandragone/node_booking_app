@@ -1,0 +1,43 @@
+services:
+  busservice:
+    build: ./buses-service
+    ports:
+      -"1111:3000"
+    container_name: busscont1
+    networks:
+      - bussnetwork
+    restart: unless-stopped
+  flightservice:
+    build: ./flights-service
+    ports:
+      -"2222:3000"
+    container_name: flightcont1
+    networks:
+      - flightnetwork
+    restart: unless-stopped
+  movieservice:
+    build: ./movies-service
+    ports:
+      -"3333:3000"
+    container_name: moviecont1
+    networks:
+      - movienetwork
+    restart: unless-stopped
+  trainservice:
+    build: ./trains-service
+    ports:
+      -"4444:3000"
+    container_name: traincont1
+    networks:
+      - traincont1
+    restart: unless:stopped
+
+networks:
+  bussnetwork:
+    driver: bridge
+  flightnetwork:
+    driver: bridge    
+  movienetwork:
+    driver: bridge
+  trainnetwork:
+    driver: bridge    
