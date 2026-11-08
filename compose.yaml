@@ -46,10 +46,10 @@ services:
 
 networks:
   bussnetwork:
-    driver: bridge
+    driver: overlay
   flightnetwork:
-    driver: bridge    
+    driver: overlay    
   movienetwork:
-    driver: bridge
+    driver: overlay
   trainnetwork:
-    driver: bridge    
+    driver: overlay    
